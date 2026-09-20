@@ -7,9 +7,14 @@ name: self-test action
 on:
   workflow_dispatch:
   push:
+    branches: [main]
     paths:
       - "action.yml"
       - ".github/workflows/self-test-action.yml"
+      # the action installs the package, so a change to the package can
+      # break it just as easily as a change to action.yml itself
+      - "tare/**"
+      - "pyproject.toml"
 
 jobs:
   run-action:
