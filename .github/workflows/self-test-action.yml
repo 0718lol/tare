@@ -92,14 +92,26 @@ jobs:
       - name: Assert the lang input is exposed and reaches the CLI
         shell: bash
         run: |
-          # action.yml must declare the input and pass it to every audit call
+          # action.yml must declare the input and pass it to every audit call.
+          #
+          # Do NOT write the GitHub input expression inline here: the runner
+          # substitutes it before bash ever sees the script, so the pattern
+          # arrives mangled and the grep silently matches nothing. Assemble
+          # it from pieces instead.
           grep -q "^  lang:" action.yml || { echo "::error::action.yml does not declare a lang input"; exit 1; }
-          n=$(grep -c -- '--lang "\${{ inputs.lang }}"' action.yml)
+
+          D='$'; O='{'; C='}'
+          PATTERN="--lang \"${D}${O}${O} inputs.lang ${C}${C}\""
+          n=$(grep -cF -- "$PATTERN" action.yml || true)
+
           if [ "$n" -ne 2 ]; then
-            echo "::error::--lang should be passed to both audit invocations (md + json), found $n"
+            echo "::error::--lang must be passed to both audit calls (md + json); expected 2, found $n"
+            echo "looked for: $PATTERN"
+            echo "--- actual --lang lines in action.yml ---"
+            grep -n -- '--lang' action.yml || echo "(none)"
             exit 1
           fi
-          echo "lang input declared and passed to $n audit invocations"
+          echo "lang input declared and passed to $n audit calls"
 
   pr-comment:
     # Exercises the PR-comment path, which the job above cannot reach:
