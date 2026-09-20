@@ -37,7 +37,19 @@ runs:
 
     - name: Install tare
       shell: bash
-      run: pip install -e "${{ github.action_path }}/.."
+      run: |
+        # github.action_path points at the directory holding this action.yml.
+        # In a consuming repo that is <checkout>/.github/actions/tare, so the
+        # package root is one level up. When the action is used from tare's
+        # own repo the action sits at the repo root, so use it directly.
+        ACTION_DIR="${{ github.action_path }}"
+        if [ -f "$ACTION_DIR/pyproject.toml" ]; then
+          PKG_DIR="$ACTION_DIR"
+        else
+          PKG_DIR="$ACTION_DIR/.."
+        fi
+        echo "installing tare from: $PKG_DIR"
+        pip install -e "$PKG_DIR"
 
     - name: Run audit
       id: audit
