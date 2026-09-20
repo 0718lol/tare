@@ -1,0 +1,11 @@
+# Normalize line endings — this is a Python project, keep LF in the repo.
+* text=auto eol=lf
+
+# Binary fixtures stay untouched.
+*.png binary
+*.jpg binary
+*.ico binary
+
+# Windows scripts, if ever added, keep CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
