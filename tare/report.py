@@ -217,7 +217,7 @@ def render_markdown(r: AuditResult, lang: str = "en") -> str:
         A("")
     A("---")
     A("")
-    A(f"## {_s(lang,'detail')}")
+    A(f"## 1. {_s(lang,'detail')}")
     A("")
     A(f"| {_s(lang,'c_block')} | {_s(lang,'c_cat')} | {_s(lang,'c_tok')} | "
       f"{_s(lang,'c_pct')} | {_s(lang,'c_verdict')} | {_s(lang,'c_conf')} | "
