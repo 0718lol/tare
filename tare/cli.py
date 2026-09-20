@@ -42,9 +42,11 @@ def cmd_audit(args):
         print(f"错误：{trace_dir} 下未找到可解析的 trace。", file=sys.stderr)
         return 2
 
-    result = audit(traces, home=ad.home())
-    out = RENDERERS[args.format](result, color=sys.stdout.isatty()) \
-        if args.format == "text" else RENDERERS[args.format](result)
+    result = audit(traces, home=ad.home(), lang=args.lang)
+    if args.format == "text":
+        out = RENDERERS["text"](result, color=sys.stdout.isatty(), lang=args.lang)
+    else:
+        out = RENDERERS[args.format](result, lang=args.lang)
 
     if args.output:
         Path(args.output).write_text(out, encoding="utf-8")
@@ -88,7 +90,9 @@ def main(argv=None):
     a.add_argument("--adapter", default="workbuddy",
                    choices=["workbuddy", "generic"], help="适配器")
     a.add_argument("--format", default="text", choices=list(RENDERERS),
-                   help="输出格式")
+                   help="output format")
+    a.add_argument("--lang", default="en", choices=["en", "zh"],
+                   help="report language (default: en)")
     a.add_argument("-o", "--output", help="写入文件而非 stdout")
     a.set_defaults(func=cmd_audit)
 

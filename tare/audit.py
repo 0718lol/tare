@@ -19,6 +19,61 @@ VERDICT_KEEP = "保留"
 VERDICT_DROP = "删除候选"
 VERDICT_MANUAL = "需人工判断"
 
+# Display labels per language. The internal verdict values stay Chinese so
+# that existing JSON consumers and the M0/M1 methodology scripts keep working;
+# only the rendered output is translated.
+VERDICT_LABELS: Dict[str, Dict[str, str]] = {
+    "zh": {VERDICT_KEEP: "保留", VERDICT_DROP: "删除候选", VERDICT_MANUAL: "需人工判断"},
+    "en": {VERDICT_KEEP: "keep", VERDICT_DROP: "drop", VERDICT_MANUAL: "review"},
+}
+
+# Category labels. Rule tables store the Chinese category so that the M0/M1
+# methodology scripts keep matching; display layer translates.
+CATEGORY_LABELS: Dict[str, str] = {
+    "策略": "policy",
+    "行为": "behavior",
+    "输出": "output",
+    "工具": "tooling",
+    "技能": "skills",
+    "记忆": "memory",
+    "运行时": "runtime",
+}
+
+# Text produced by the probe/audit layer also needs translating.
+I18N: Dict[str, Dict[str, str]] = {
+    "zh": {
+        "no_rule": "无对应规则",
+        "no_probe": "无行为探针",
+        "never_seen": "从未出现",
+    },
+    "en": {
+        "no_rule": "no matching rule",
+        "no_probe": "no behavior probe",
+        "never_seen": "never observed",
+    },
+}
+
+
+def _t(lang: str, key: str) -> str:
+    return I18N.get(lang, I18N["en"]).get(key, key)
+
+
+CONFIDENCE_LABELS: Dict[str, str] = {"高": "high", "中": "medium", "低": "low"}
+
+
+def _cat(category: str, lang: str) -> str:
+    """Translate a category label for display."""
+    if lang == "zh" or not category:
+        return category
+    return CATEGORY_LABELS.get(category, category)
+
+
+def _conf(confidence: str, lang: str) -> str:
+    if lang == "zh" or not confidence:
+        return confidence
+    return CONFIDENCE_LABELS.get(confidence, confidence)
+
+
 # 切分 system prompt 的顶层标记
 SPLIT_RE = re.compile(r"^(<([a-z_]{3,45})>|#{1,2}\s+(.+))", re.MULTILINE)
 
@@ -138,7 +193,8 @@ def run_path_probe(paths: List[str], home: Optional[str]) -> Tuple[Optional[bool
     return any_exist, "; ".join(notes)
 
 
-def audit(traces: List[Trace], home: Optional[str] = None) -> AuditResult:
+def audit(traces: List[Trace], home: Optional[str] = None,
+          lang: str = "en") -> AuditResult:
     """执行静默审计"""
     if not traces:
         return AuditResult()
@@ -160,11 +216,23 @@ def audit(traces: List[Trace], home: Optional[str] = None) -> AuditResult:
         rule = rules.lookup(label)
 
         if rule is None:
-            verdict, evidence, conf, cat, note = VERDICT_MANUAL, "无对应规则", "低", "", ""
+            verdict, evidence, conf, cat, note = (
+                VERDICT_MANUAL, _t(lang, "no_rule"), "低", "", "")
         elif rule.probe.kind == "span":
             fired, ev = run_span_probe(rule.probe.needles, span_names, tool_names)
-            verdict = VERDICT_KEEP if fired else VERDICT_DROP
-            evidence = f"{ev} — {rule.probe.rationale}" if not fired else ev
+            if fired:
+                verdict, evidence = VERDICT_KEEP, ev
+            else:
+                verdict = VERDICT_DROP
+                # The rationale string lives in the rule table and is Chinese.
+                # For English output, fall back to the English note (which
+                # already says what the block is for) instead of leaking it.
+                evidence = _t(lang, "never_seen")
+                if lang == "en":
+                    if rule.note_en:
+                        evidence += f" — {rule.note_en}"
+                else:
+                    evidence += f" — {rule.probe.rationale}"
             conf, cat, note = rule.probe.confidence, rule.category, rule.note
         elif rule.probe.kind == "path":
             ok, ev = run_path_probe(rule.probe.needles, home)
@@ -174,13 +242,17 @@ def audit(traces: List[Trace], home: Optional[str] = None) -> AuditResult:
             conf, cat, note = rule.probe.confidence, rule.category, rule.note
         else:
             verdict, evidence, conf, cat, note = (
-                VERDICT_MANUAL, "无行为探针", rule.probe.confidence, rule.category, rule.note)
+                VERDICT_MANUAL, _t(lang, "no_probe"),
+                rule.probe.confidence, rule.category, rule.note)
+
+        disp_note = (rule.note_en or rule.note) if (rule and lang == "en") else note
 
         blocks.append(BlockResult(
             block=label, chars=n, tokens=n // 4,
             pct=n / total * 100 if total else 0,
             verdict=verdict, evidence=evidence,
-            confidence=conf, category=cat, note=note,
+            confidence=_conf(conf, lang), category=_cat(cat, lang),
+            note=disp_note,
         ))
 
     blocks.sort(key=lambda b: -b.tokens)
