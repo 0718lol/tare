@@ -18,6 +18,10 @@ inputs:
     description: Post the audit result back to the PR
     required: false
     default: "true"
+  lang:
+    description: Language of the report and PR comment (en | zh)
+    required: false
+    default: "en"
 
 outputs:
   droppable-tokens:
@@ -57,9 +61,11 @@ runs:
       run: |
         tare audit --adapter "${{ inputs.adapter }}" \
                    --trace-dir "${{ inputs.trace-dir }}" \
+                   --lang "${{ inputs.lang }}" \
                    --format md -o tare-audit.md
         tare audit --adapter "${{ inputs.adapter }}" \
                    --trace-dir "${{ inputs.trace-dir }}" \
+                   --lang "${{ inputs.lang }}" \
                    --format json -o tare-audit.json
         python - <<'PY'
         import json, os

@@ -125,6 +125,7 @@ Exit code is `0` on success, `2` on missing/unparseable traces — so it drops i
     trace-dir: ./.traces
     adapter: generic
     fail-on-droppable-percent: "25"   # fail if >25% of the prompt is dead weight
+    lang: en                          # or "zh" for a Chinese report
 ```
 
 Outputs `droppable-tokens` and `droppable-percent` for downstream steps.

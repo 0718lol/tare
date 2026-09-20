@@ -59,6 +59,48 @@ jobs:
           fi
           echo "gate correctly failed at limit=1"
 
+      # The lang input is easy to add to action.yml and forget to wire into the
+      # audit invocation -- then the action silently emits English forever.
+      - name: Run the action with lang=zh
+        id: zh
+        uses: ./
+        with:
+          adapter: generic
+          trace-dir: examples/traces
+          comment: "false"
+          lang: "zh"
+
+      - name: Assert the zh report is actually Chinese
+        shell: bash
+        run: |
+          # verify the CLI default too, so a regression in either direction is caught
+          tare audit --adapter generic --trace-dir examples/traces --lang en --format md -o /tmp/en.md
+          tare audit --adapter generic --trace-dir examples/traces --lang zh --format md -o /tmp/zh.md
+
+          grep -q "## Summary" /tmp/en.md || { echo "::error::--lang en did not produce English headings"; cat /tmp/en.md; exit 1; }
+          grep -q "核心结论\|区块明细" /tmp/zh.md || { echo "::error::--lang zh did not produce Chinese headings"; cat /tmp/zh.md; exit 1; }
+
+          if grep -q "## Summary" /tmp/zh.md; then
+            echo "::error::--lang zh still emitted English headings"
+            exit 1
+          fi
+
+          echo "en headings : $(grep -c '^## ' /tmp/en.md)"
+          echo "zh headings : $(grep -c '^## ' /tmp/zh.md)"
+          echo "language switching works in both directions"
+
+      - name: Assert the lang input is exposed and reaches the CLI
+        shell: bash
+        run: |
+          # action.yml must declare the input and pass it to every audit call
+          grep -q "^  lang:" action.yml || { echo "::error::action.yml does not declare a lang input"; exit 1; }
+          n=$(grep -c -- '--lang "\${{ inputs.lang }}"' action.yml)
+          if [ "$n" -ne 2 ]; then
+            echo "::error::--lang should be passed to both audit invocations (md + json), found $n"
+            exit 1
+          fi
+          echo "lang input declared and passed to $n audit invocations"
+
   pr-comment:
     # Exercises the PR-comment path, which the job above cannot reach:
     # it is gated on github.event_name == 'pull_request'.
