@@ -88,12 +88,13 @@ runs:
     - name: Gate
       if: inputs.fail-on-droppable-percent != '0'
       shell: bash
+      env:
+        PCT: ${{ steps.audit.outputs.percent }}
+        LIMIT: ${{ inputs.fail-on-droppable-percent }}
       run: |
-        PCT="${{ steps.audit.outputs.percent }}"
-        LIMIT="${{ inputs.fail-on-droppable-percent }}"
         echo "dead weight: ${PCT}% (limit ${LIMIT}%)"
         python -c "
-        import sys
-        pct, limit = float('${PCT}'), float('${LIMIT}')
+        import os, sys
+        pct, limit = float(os.environ['PCT']), float(os.environ['LIMIT'])
         sys.exit(1 if pct > limit else 0)
         "
