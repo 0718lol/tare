@@ -110,6 +110,24 @@ Exit code is `0` on success, `2` on missing/unparseable traces — so it drops i
 
 ---
 
+## CI usage
+
+`action.yml` posts the audit as a PR comment (updating one comment in place rather than spamming) and can fail the check on a threshold:
+
+```yaml
+- uses: 0718lol/tare@main
+  with:
+    trace-dir: ./.traces
+    adapter: generic
+    fail-on-droppable-percent: "25"   # fail if >25% of the prompt is dead weight
+```
+
+Outputs `droppable-tokens` and `droppable-percent` for downstream steps.
+
+> Note: adding a workflow file to a repository requires a token with the `workflow` scope. If you hit `refusing to allow an OAuth App to create or update workflow`, re-authorize with `gh auth refresh -s workflow`.
+
+---
+
 ## A real finding
 
 On one actual run, `tare` surfaced this:

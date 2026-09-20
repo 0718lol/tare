@@ -1,30 +1,30 @@
 name: tare harness audit
-description: 审计 agent harness 的上下文 ROI，在 PR 上报告可回收 token
+description: Audit agent harness context ROI and report reclaimable tokens on the PR
 
 inputs:
   trace-dir:
-    description: harness 运行记录目录
+    description: Directory containing harness execution traces
     required: false
     default: "~/.workbuddy-ai/traces"
   adapter:
-    description: 适配器（workbuddy | generic）
+    description: Adapter to use (workbuddy | generic)
     required: false
     default: "workbuddy"
   fail-on-droppable-percent:
-    description: 死重占比超过该阈值时检查失败（0 表示不失败）
+    description: Fail the check when dead-weight share exceeds this percent (0 disables)
     required: false
     default: "0"
   comment:
-    description: 是否把结果回写到 PR
+    description: Post the audit result back to the PR
     required: false
     default: "true"
 
 outputs:
   droppable-tokens:
-    description: 可回收的 token 数
+    description: Number of reclaimable tokens
     value: ${{ steps.audit.outputs.droppable }}
   droppable-percent:
-    description: 死重占 system prompt 的百分比
+    description: Dead weight as a percentage of the system prompt
     value: ${{ steps.audit.outputs.percent }}
 
 runs:
@@ -91,7 +91,7 @@ runs:
       run: |
         PCT="${{ steps.audit.outputs.percent }}"
         LIMIT="${{ inputs.fail-on-droppable-percent }}"
-        echo "死重占比: ${PCT}% (阈值 ${LIMIT}%)"
+        echo "dead weight: ${PCT}% (limit ${LIMIT}%)"
         python -c "
         import sys
         pct, limit = float('${PCT}'), float('${LIMIT}')
