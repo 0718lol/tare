@@ -1,0 +1,54 @@
+name: self-test action
+
+# Exercises the composite action against the bundled example traces.
+# This is the real M3 check: does action.yml work when GitHub runs it,
+# not just when we replay its steps locally?
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "action.yml"
+      - ".github/workflows/self-test-action.yml"
+
+jobs:
+  run-action:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Run the tare action on example traces
+        id: tare
+        uses: ./
+        with:
+          adapter: generic
+          trace-dir: examples/traces
+          comment: "false"
+          fail-on-droppable-percent: "0"
+
+      - name: Assert outputs are populated
+        shell: bash
+        run: |
+          echo "droppable-tokens  = ${{ steps.tare.outputs.droppable-tokens }}"
+          echo "droppable-percent = ${{ steps.tare.outputs.droppable-percent }}"
+          test -n "${{ steps.tare.outputs.droppable-tokens }}" || { echo "::error::droppable-tokens empty"; exit 1; }
+          test -n "${{ steps.tare.outputs.droppable-percent }}" || { echo "::error::droppable-percent empty"; exit 1; }
+
+      - name: Assert the gate actually fails when the limit is exceeded
+        id: gate
+        continue-on-error: true
+        uses: ./
+        with:
+          adapter: generic
+          trace-dir: examples/traces
+          comment: "false"
+          fail-on-droppable-percent: "1"
+
+      - name: Confirm the gate tripped
+        shell: bash
+        run: |
+          if [ "${{ steps.gate.outcome }}" != "failure" ]; then
+            echo "::error::gate should have failed at limit=1 (droppable is 52%), got '${{ steps.gate.outcome }}'"
+            exit 1
+          fi
+          echo "gate correctly failed at limit=1"

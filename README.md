@@ -1,5 +1,7 @@
 # tare
 
+[![test](https://github.com/0718lol/tare/actions/workflows/test.yml/badge.svg)](https://github.com/0718lol/tare/actions/workflows/test.yml)
+
 > Static dead-weight detection for agent harnesses.
 
 **tare** (the weight of an empty container) — strip the container's own weight, measure what's actually carrying load.
