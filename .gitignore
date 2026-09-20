@@ -10,7 +10,3 @@ ablation_result.json
 collect_*.json
 tare-audit.md
 tare-audit.json
-
-# Kept out of the repo until the token has the "workflow" scope.
-# The file itself is preserved locally at .github/workflows/test.yml
-.github/workflows/test.yml
