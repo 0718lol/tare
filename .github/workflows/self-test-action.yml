@@ -15,6 +15,7 @@ on:
       # break it just as easily as a change to action.yml itself
       - "tare/**"
       - "pyproject.toml"
+  pull_request:
 
 jobs:
   run-action:
@@ -57,3 +58,28 @@ jobs:
             exit 1
           fi
           echo "gate correctly failed at limit=1"
+
+  pr-comment:
+    # Exercises the PR-comment path, which the job above cannot reach:
+    # it is gated on github.event_name == 'pull_request'.
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Run the tare action with commenting enabled
+        id: tare
+        uses: ./
+        with:
+          adapter: generic
+          trace-dir: examples/traces
+          comment: "true"
+
+      - name: Report what happened
+        shell: bash
+        run: |
+          echo "droppable-tokens  = ${{ steps.tare.outputs.droppable-tokens }}"
+          echo "droppable-percent = ${{ steps.tare.outputs.droppable-percent }}"
