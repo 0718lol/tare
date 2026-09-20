@@ -1,6 +1,9 @@
 # tare
 
-[![test](https://github.com/0718lol/tare/actions/workflows/test.yml/badge.svg)](https://github.com/0718lol/tare/actions/workflows/test.yml)
+[![test](https://github.com/0718lol/tare/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/0718lol/tare/actions/workflows/test.yml)
+[![self-test action](https://github.com/0718lol/tare/actions/workflows/self-test-action.yml/badge.svg?branch=main)](https://github.com/0718lol/tare/actions/workflows/self-test-action.yml)
+[![python](https://img.shields.io/badge/python-3.9%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue)](https://github.com/0718lol/tare/actions/workflows/test.yml)
+[![license](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
 > Static dead-weight detection for agent harnesses.
 
