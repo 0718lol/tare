@@ -1,0 +1,500 @@
+{
+  "trace_count": 28,
+  "model_info": [
+    {
+      "traceId": "trace_39cf8034dd1449e6a3c6590928c9053a",
+      "sessionId": "1c549e18-ca03-4369-acad-ce836db9fb94",
+      "models": [
+        "deepseek-v4.1-flash"
+      ],
+      "callCount": 8,
+      "input": 652488,
+      "cached": 647552,
+      "output": 8404,
+      "hitRate": 0.9924351099177303,
+      "status": "error",
+      "duration": 83695,
+      "spanCount": 40,
+      "startedAt": "2026-09-19T17:04:28.338Z"
+    },
+    {
+      "traceId": "trace_8afa4d37ccd6453895c6c38d8e1b1200",
+      "sessionId": "1c549e18-ca03-4369-acad-ce836db9fb94",
+      "models": [
+        "deepseek-v4.1-flash"
+      ],
+      "callCount": 6,
+      "input": 319637,
+      "cached": 293120,
+      "output": 3606,
+      "hitRate": 0.917040267553506,
+      "status": "ok",
+      "duration": 97833,
+      "spanCount": 39,
+      "startedAt": "2026-09-19T16:50:48.393Z"
+    },
+    {
+      "traceId": "trace_cdc1ec32d1fa43e1ad402d3c504f3e0e",
+      "sessionId": "1c549e18-ca03-4369-acad-ce836db9fb94",
+      "models": [
+        "deepseek-v4.1-flash"
+      ],
+      "callCount": 9,
+      "input": 635511,
+      "cached": 603904,
+      "output": 7122,
+      "hitRate": 0.9502652196421463,
+      "status": "ok",
+      "duration": 88905,
+      "spanCount": 47,
+      "startedAt": "2026-09-19T17:00:42.221Z"
+    },
+    {
+      "traceId": "trace_6cc2c105642d4b9b9df39bef9184ea88",
+      "sessionId": "097b8f2d-be68-4acc-9360-4f2935fa3fa1",
+      "models": [
+        "deepseek-v4.1-flash"
+      ],
+      "callCount": 1,
+      "input": 33954,
+      "cached": 0,
+      "output": 368,
+      "hitRate": 0.0,
+      "status": "ok",
+      "duration": 6977,
+      "spanCount": 13,
+      "startedAt": "2026-09-19T10:13:37.446Z"
+    },
+    {
+      "traceId": "trace_2db4607eced64ac988f5d2b5f2f266d6",
+      "sessionId": "1c549e18-ca03-4369-acad-ce836db9fb94",
+      "models": [
+        "deepseek-v4.1-flash"
+      ],
+      "callCount": 3,
+      "input": 114145,
+      "cached": 73856,
+      "output": 925,
+      "hitRate": 0.6470366638924175,
+      "status": "ok",
+      "duration": 53168,
+      "spanCount": 18,
+      "startedAt": "2026-09-19T16:47:25.032Z"
+    },
+    {
+      "traceId": "trace_576f88b352354533a03fa529d409f6f0",
+      "sessionId": "097b8f2d-be68-4acc-9360-4f2935fa3fa1",
+      "models": [
+        "deepseek-v4.1-flash"
+      ],
+      "callCount": 6,
+      "input": 1557287,
+      "cached": 1554560,
+      "output": 2386,
+      "hitRate": 0.9982488776956335,
+      "status": "ok",
+      "duration": 107958,
+      "spanCount": 44,
+      "startedAt": "2026-09-19T16:00:01.358Z"
+    },
+    {
+      "traceId": "trace_581497ee872445b89747b9f7fdeb33d3",
+      "sessionId": "097b8f2d-be68-4acc-9360-4f2935fa3fa1",
+      "models": [
+        "deepseek-v4.1-flash"
+      ],
+      "callCount": 9,
+      "input": 2205720,
+      "cached": 2200832,
+      "output": 8041,
+      "hitRate": 0.9977839435649131,
+      "status": "ok",
+      "duration": 259106,
+      "spanCount": 63,
+      "startedAt": "2026-09-19T15:50:12.716Z"
+    },
+    {
+      "traceId": "trace_5e661a49ef2e4a94acffec3b4e05d3ca",
+      "sessionId": "097b8f2d-be68-4acc-9360-4f2935fa3fa1",
+      "models": [
+        "deepseek-v4.1-flash"
+      ],
+      "callCount": 1,
+      "input": 262186,
+      "cached": 257536,
+      "output": 336,
+      "hitRate": 0.982264499248625,
+      "status": "ok",
+      "duration": 52761,
+      "spanCount": 10,
+      "startedAt": "2026-09-19T16:05:56.597Z"
+    },
+    {
+      "traceId": "trace_9e16d8263a9b419d952a1868162097a8",
+      "sessionId": "097b8f2d-be68-4acc-9360-4f2935fa3fa1",
+      "models": [
+        "deepseek-v4.1-flash"
+      ],
+      "callCount": 5,
+      "input": 1335356,
+      "cached": 1332480,
+      "output": 6981,
+      "hitRate": 0.9978462672126385,
+      "status": "error",
+      "duration": 223512,
+      "spanCount": 33,
+      "startedAt": "2026-09-19T16:09:24.117Z"
+    },
+    {
+      "traceId": "trace_bc873e46c0154645acc59c10a49f2ad5",
+      "sessionId": "097b8f2d-be68-4acc-9360-4f2935fa3fa1",
+      "models": [
+        "deepseek-v4.1-flash"
+      ],
+      "callCount": 13,
+      "input": 1753372,
+      "cached": 1676288,
+      "output": 8469,
+      "hitRate": 0.9560367109774766,
+      "status": "ok",
+      "duration": 1030746,
+      "spanCount": 65,
+      "startedAt": "2026-09-19T11:52:29.830Z"
+    },
+    {
+      "traceId": "trace_c0d0e3cbe4f644f18d09e31a912d3472",
+      "sessionId": "097b8f2d-be68-4acc-9360-4f2935fa3fa1",
+      "models": [
+        "deepseek-v4.1-flash"
+      ],
+      "callCount": 2,
+      "input": 499834,
+      "cached": 474624,
+      "output": 769,
+      "hitRate": 0.9495632550006602,
+      "status": "ok",
+      "duration": 25408,
+      "spanCount": 15,
+      "startedAt": "2026-09-19T15:56:26.959Z"
+    },
+    {
+      "traceId": "trace_c65c56d0c0bd4ef595306121d2e59da8",
+      "sessionId": "097b8f2d-be68-4acc-9360-4f2935fa3fa1",
+      "models": [
+        "deepseek-v4.1-flash"
+      ],
+      "callCount": 32,
+      "input": 2283055,
+      "cached": 2256896,
+      "output": 38624,
+      "hitRate": 0.9885421069575634,
+      "status": "ok",
+      "duration": 359431,
+      "spanCount": 160,
+      "startedAt": "2026-09-19T10:15:55.451Z"
+    },
+    {
+      "traceId": "trace_379fb6da2d364ccbb2985a1bfcf8d480",
+      "sessionId": "097b8f2d-be68-4acc-9360-4f2935fa3fa1",
+      "models": [
+        "deepseek-v4.1-flash"
+      ],
+      "callCount": 8,
+      "input": 665508,
+      "cached": 590592,
+      "output": 4245,
+      "hitRate": 0.8874303539551741,
+      "status": "ok",
+      "duration": 81181,
+      "spanCount": 40,
+      "startedAt": "2026-09-19T16:24:25.538Z"
+    }
+  ],
+  "span_names": {
+    "mcp_tools": 678,
+    "cli": 20,
+    "generation": 235,
+    "WebSearch": 7,
+    "WebFetch": 11,
+    "Bash": 105,
+    "Write": 17,
+    "Edit": 10,
+    "present_files": 4,
+    "contentAnalyzer": 5,
+    "read_me": 1,
+    "show_widget": 1,
+    "Read": 27,
+    "terminalTitleGenerator": 4,
+    "AskUserQuestion": 4,
+    "PowerShell": 22,
+    "TaskOutput": 4,
+    "contextSummary": 1,
+    "Skill": 2
+  },
+  "span_types": {
+    "custom": 678,
+    "agent": 30,
+    "generation": 235,
+    "function": 215
+  },
+  "tools": {
+    "WebSearch": 7,
+    "WebFetch": 11,
+    "Bash": 105,
+    "Write": 17,
+    "Edit": 10,
+    "present_files": 4,
+    "read_me": 1,
+    "show_widget": 1,
+    "Read": 27,
+    "AskUserQuestion": 4,
+    "PowerShell": 22,
+    "TaskOutput": 4,
+    "Skill": 2
+  },
+  "prompt_skeletons": [
+    {
+      "traceId": "trace_8afa4d37ccd6453895c6c38d8e1b1200",
+      "spanId": "span_62aae15b3a874f86aea97bee",
+      "chars": 41274,
+      "est_tokens": 10318,
+      "sections": [
+        [
+          "xml_tag",
+          "<content_policy>"
+        ],
+        [
+          "xml_tag",
+          "<personal_files_safety>"
+        ],
+        [
+          "xml_tag",
+          "<working_modes>"
+        ],
+        [
+          "xml_tag",
+          "<agent_loop>"
+        ],
+        [
+          "xml_tag",
+          "<result_presentation>"
+        ],
+        [
+          "xml_tag",
+          "<sharing_files>"
+        ],
+        [
+          "xml_tag",
+          "<final_answer_instructions>"
+        ],
+        [
+          "xml_tag",
+          "<automations>"
+        ],
+        [
+          "xml_tag",
+          "<tool_use>"
+        ],
+        [
+          "xml_tag",
+          "<instructions_for_visualizer>"
+        ],
+        [
+          "md_heading",
+          "# Explicit triggers"
+        ],
+        [
+          "md_heading",
+          "# Proactive triggers (no explicit ask needed)"
+        ],
+        [
+          "md_heading",
+          "# Specification triggers (no verb needed)"
+        ],
+        [
+          "md_heading",
+          "# Multi-visualization responses"
+        ],
+        [
+          "md_heading",
+          "# Design guidance"
+        ],
+        [
+          "xml_tag",
+          "<visualizer_examples>"
+        ],
+        [
+          "xml_tag",
+          "<task_management>"
+        ],
+        [
+          "xml_tag",
+          "<asking_questions>"
+        ],
+        [
+          "xml_tag",
+          "<tool_usage_policy>"
+        ],
+        [
+          "xml_tag",
+          "<agent_skills>"
+        ],
+        [
+          "xml_tag",
+          "<examples>"
+        ],
+        [
+          "xml_tag",
+          "<office_skill_routing>"
+        ],
+        [
+          "xml_tag",
+          "<plugin_recommendation>"
+        ],
+        [
+          "xml_tag",
+          "<expert_management>"
+        ],
+        [
+          "xml_tag",
+          "<mcp_configuration>"
+        ],
+        [
+          "xml_tag",
+          "<response_language>"
+        ],
+        [
+          "xml_tag",
+          "<binary_context>"
+        ],
+        [
+          "md_heading",
+          "# Available Runtimes"
+        ],
+        [
+          "md_heading",
+          "## Python"
+        ],
+        [
+          "md_heading",
+          "## Node"
+        ],
+        [
+          "md_heading",
+          "# Runtime Selection Rules"
+        ],
+        [
+          "md_heading",
+          "# Runtime Isolation Rules"
+        ],
+        [
+          "xml_tag",
+          "<memory_system>"
+        ],
+        [
+          "md_heading",
+          "# Layer 1 — Cloud Memory"
+        ],
+        [
+          "md_heading",
+          "# Layer 2 — User-level Local Memory (read/write)"
+        ],
+        [
+          "md_heading",
+          "# Layer 3 — Workspace Memory (read/write)"
+        ],
+        [
+          "xml_tag",
+          "<capability_constraints>"
+        ]
+      ],
+      "head": "This conversation is powered by deepseek-v4.1-flash\r\n\r\nYour main goal is to follow the USER's instructions at each message, denoted by the <user_query> tag.\r\n\r\nHere's what you're good at — and you sho"
+    },
+    {
+      "traceId": "trace_8afa4d37ccd6453895c6c38d8e1b1200",
+      "spanId": "span_62aae15b3a874f86aea97bee",
+      "chars": 13329,
+      "est_tokens": 3332,
+      "sections": [
+        [
+          "md_heading",
+          "## [cloudflare / security-audit-skill](https://github.com/cloudflare/security-audit-skill)"
+        ],
+        [
+          "md_heading",
+          "## [trycua / cua](https://github.com/trycua/cua)"
+        ],
+        [
+          "md_heading",
+          "## [addyosmani / agent-skills](https://github.com/addyosmani/agent-skills)"
+        ],
+        [
+          "md_heading",
+          "## [coder / coder](https://github.com/coder/coder)"
+        ],
+        [
+          "md_heading",
+          "## [anthropics / claude-code](https://github.com/anthropics/claude-code)"
+        ],
+        [
+          "md_heading",
+          "## [Open-Dev-Society / OpenStock](https://github.com/Open-Dev-Society/OpenStock)"
+        ],
+        [
+          "md_heading",
+          "## [higgsfield-ai / higgsfield](https://github.com/higgsfield-ai/higgsfield)"
+        ],
+        [
+          "md_heading",
+          "## [docling-project / docling](https://github.com/docling-project/docling)"
+        ],
+        [
+          "md_heading",
+          "## [cloudflare / quiche](https://github.com/cloudflare/quiche)"
+        ],
+        [
+          "md_heading",
+          "## [asciimoo / hister](https://github.com/asciimoo/hister)"
+        ],
+        [
+          "md_heading",
+          "## [ruanyf / weekly](https://github.com/ruanyf/weekly)"
+        ],
+        [
+          "md_heading",
+          "## [ZuodaoTech / everyone-can-use-english](https://github.com/ZuodaoTech/everyone-can-use-english)"
+        ],
+        [
+          "md_heading",
+          "## [anthropics / knowledge-work-plugins](https://github.com/anthropics/knowledge-work-plugins)"
+        ],
+        [
+          "md_heading",
+          "## [cactus-compute / needle](https://github.com/cactus-compute/needle)"
+        ],
+        [
+          "md_heading",
+          "## [yynxxxxx / Codex-X](https://github.com/yynxxxxx/Codex-X)"
+        ]
+      ],
+      "head": "**标题**: Trending  repositories on GitHub today · GitHub\n\n[Star](https://github.com/login?return_to=%2Fcloudflare%2Fsecurity-audit-skill)\n\n## [cloudflare / security-audit-skill](https://github.com/clou"
+    },
+    {
+      "traceId": "trace_8afa4d37ccd6453895c6c38d8e1b1200",
+      "spanId": "span_62aae15b3a874f86aea97bee",
+      "chars": 3964,
+      "est_tokens": 991,
+      "sections": [
+        [
+          "md_heading",
+          "# Top Trending GitHub Repositories This Week"
+        ],
+        [
+          "md_heading",
+          "## Key Observations"
+        ]
+      ],
+      "head": "# Top Trending GitHub Repositories This Week\n\nHere are the trending repositories ranked by stars gained this week (highest to lowest):\n\n| # | Repository | Description | Language | ⭐ This Week | Total "
+    }
+  ]
+}

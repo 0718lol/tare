@@ -1,0 +1,17 @@
+{
+  "layer_totals": {
+    "messages.user": 103281,
+    "system": 167238,
+    "messages.tool_result": 63366,
+    "messages.assistant": 1789
+  },
+  "skill_evidence": [
+    {
+      "traceId": "trace_8afa4d37ccd6453895c6c38d8e1b1200",
+      "role": "system",
+      "agent_skills_chars": 7189,
+      "skill_entries": 0,
+      "sample": []
+    }
+  ]
+}
